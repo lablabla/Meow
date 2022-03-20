@@ -7,8 +7,12 @@ import kotlinx.coroutines.flow.flow
 
 class SendMeow {
 
-    operator fun invoke() : Flow<Resource<MeowUser>> {
-        TODO("Unimplemented")
-        return flow {}
+    suspend operator fun invoke(meowUser: MeowUser) : Flow<Resource<MeowUser>> = flow {
+        try {
+            // Send actual meow
+            emit(Resource.Success(data = meowUser))
+        } catch (e: Exception) {
+            emit(Resource.Error(message = e.localizedMessage ?: "Failed sending meow"))
+        }
     }
 }

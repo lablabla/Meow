@@ -12,6 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.lablabla.meow.presentation.ContactListViewModel
 import com.lablabla.meow.presentation.user_list.components.UserItem
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ContactListScreen(
@@ -29,6 +31,17 @@ fun ContactListScreen(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is ContactListViewModel.UIEvent.ShowSnackbar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
+                }
+            }
+        }
+    }
     Scaffold(
         scaffoldState = scaffoldState
     ) {
@@ -44,7 +57,9 @@ fun ContactListScreen(
                         user = user,
                         modifier = Modifier
                             .fillMaxHeight()
-                            .clickable {  }
+                            .clickable {
+                                viewModel.onEvent(ContactListViewModel.Event.SendMeow(user))
+                            }
                         )
                 }
             }

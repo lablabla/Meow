@@ -20,7 +20,7 @@ fun UserItem(
         modifier = modifier
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
@@ -28,13 +28,13 @@ fun UserItem(
                 painter = painterResource(id = user.drawable),
                 contentDescription = "User Icon",
                 tint = MaterialTheme.colors.onSurface,
-                modifier = modifier.size(64.dp)
+                modifier = Modifier.size(64.dp)
             )
             Text(
                 text = user.name,
                 style = MaterialTheme.typography.h4,
                 color = MaterialTheme.colors.onSurface,
-                modifier = modifier
+                modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(horizontal = 32.dp)
             )

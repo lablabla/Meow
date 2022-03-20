@@ -11,6 +11,8 @@ import com.lablabla.meow.data.util.GsonParser
 import com.lablabla.meow.data.util.JsonParser
 import com.lablabla.meow.domain.repository.MeowRepository
 import com.lablabla.meow.domain.use_case.GetUsers
+import com.lablabla.meow.domain.use_case.SendMeow
+import com.lablabla.meow.domain.use_case.UseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,7 +60,10 @@ object AppModule {
     // Use cases
     @Provides
     @Singleton
-    fun provodeGetUsersUseCase(repository: MeowRepository) : GetUsers {
-        return GetUsers(repository)
+    fun provideUseCases(repository: MeowRepository) : UseCases {
+        return UseCases(
+            getUsers = GetUsers(repository),
+            sendMeow = SendMeow()
+        )
     }
 }
