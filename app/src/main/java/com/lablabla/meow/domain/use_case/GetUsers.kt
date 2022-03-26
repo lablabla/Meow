@@ -1,5 +1,6 @@
 package com.lablabla.meow.domain.use_case
 
+import com.google.firebase.auth.FirebaseAuth
 import com.lablabla.meow.core.util.Resource
 import com.lablabla.meow.domain.model.MeowUser
 import com.lablabla.meow.domain.repository.MeowRepository

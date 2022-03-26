@@ -13,8 +13,6 @@ class MeowRepositoryImpl(
     private val dao: MeowUserDao
 ): MeowRepository {
     override fun getUsers(): Flow<Resource<List<MeowUser>>> = flow {
-        emit(Resource.Loading())
-
         val users = dao.getMeowUsers().map { it.toMeowUser() }
         emit(Resource.Loading(data = users))
 

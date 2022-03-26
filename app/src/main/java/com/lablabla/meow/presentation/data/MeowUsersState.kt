@@ -1,4 +1,4 @@
-package com.lablabla.meow.presentation
+package com.lablabla.meow.presentation.data
 
 import com.lablabla.meow.domain.model.MeowUser
 

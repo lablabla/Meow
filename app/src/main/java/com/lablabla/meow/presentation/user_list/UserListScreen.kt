@@ -18,8 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.lablabla.meow.presentation.ContactListViewModel
+import com.lablabla.meow.presentation.viewmodel.ContactListViewModel
 import com.lablabla.meow.presentation.user_list.components.UserItem
+import com.lablabla.meow.presentation.viewmodel.BaseViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -34,7 +35,7 @@ fun ContactListScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is ContactListViewModel.UIEvent.ShowSnackbar -> {
+                is BaseViewModel.UIEvent.ShowSnackbar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message
                     )
@@ -58,7 +59,7 @@ fun ContactListScreen(
                         modifier = Modifier
                             .fillMaxHeight()
                             .clickable {
-                                viewModel.onEvent(ContactListViewModel.Event.SendMeow(user))
+                                viewModel.onEvent(ContactListViewModel.ContactListEvent.SendMeow(user))
                             }
                         )
                 }
